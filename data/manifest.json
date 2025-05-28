@@ -1,0 +1,18 @@
+{
+  "download_id": "70b9a554-8d70-43a8-86c9-b4fe6b516ea4",
+  "duration_in_seconds": 7.48558,
+  "end": "2023-07-18T11:20:17.438420",
+  "file_format": "csv",
+  "files": [
+    "resource.csv",
+    "manifest.json"
+  ],
+  "format_args": {},
+  "ignore_empty_fields": false,
+  "query-doi": "10.5519/qd.7dn4oop9",
+  "resources": {},
+  "separate_files": false,
+  "start": "2023-07-18T11:20:09.952840",
+  "total_records": 376992,
+  "transform": {}
+}
