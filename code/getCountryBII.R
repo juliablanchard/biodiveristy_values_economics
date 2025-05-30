@@ -56,7 +56,7 @@ library(readr)
 write_csv(bii_data_named, "output/bii_timeseries_by_country.csv")
 
 
-########## 2. Combine biodiversity & economci indicators
+########## 2. Combine biodiversity & economic indicators
 
 install.packages("gapminder")
 library(gapminder)
@@ -96,15 +96,23 @@ bii_gdp<- bii_data_named %>% filter(bii_data_named$country %in% country_list & v
 
 summary(bii_gdp) 
 
-
 # snapshot to see how compares across countries ina given year- no clear pattern
+ggplot(bii_gdp, aes(x = value, y = mean_GDPPP, color = continent)) +
+  geom_point() +
+  facet_wrap(~ year, scales = "free_y") +
+  labs(title = "BII vs GDPPP",
+       x ="Per Capita GDP" , y = "Biodiversity Intactness Index (%)") +
+  theme_minimal()
+
+
+#  single country through time
 ggplot(filter(bii_gdp,country=="Australia"), aes(y = value, x = year, color = continent)) +
   geom_point() +
   labs(title = "BII vs time Australia",
        x ="Year" , y = "Biodiversity Intactness Index (%)") +
   theme_minimal()
 
-# change in BII vs change in GDP relative to 1970
+# calculate change in BII vs change in GDP relative to 1970
 
 bii_gdp <- bii_gdp %>%
   group_by(country) %>%
@@ -114,7 +122,7 @@ bii_gdp <- bii_gdp %>%
   ungroup()
 
 
-# snapshot to see how compares across countries ina given year- no clear pattern
+# snapshot to see how DELTAS compares across countries ina given year- no clear pattern
 ggplot(filter(bii_gdp, year == 1990), aes(y = change_gdp, x = change_bii, color = continent)) +
   geom_point() +  # data points
   geom_hline(yintercept = 0, color = "black", linetype = "solid") +  # horizontal line at y = 0
@@ -127,7 +135,7 @@ ggplot(filter(bii_gdp, year == 1990), aes(y = change_gdp, x = change_bii, color 
   theme_minimal()
 
 # Export merged data with country names
-write_csv(bii_data_named, "output/bii_gdppp_timeseries_by_country.csv")
+write_csv(bii_gdp, "output/bii_gdppp_timeseries_by_country.csv")
 
 
 

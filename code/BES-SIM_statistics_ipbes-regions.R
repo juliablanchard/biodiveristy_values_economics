@@ -232,3 +232,6 @@ for(m in unique(result_ESS$Model)){
 #write data delta
 xlsx::write.xlsx(result_delta[,1:13], file.path(root_outputs, 'Values_IPBES-regions_raw-delta.xlsx'),'ipbes.stats-delta')
 
+
+
+
